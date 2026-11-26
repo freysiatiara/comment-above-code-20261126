@@ -28,6 +28,10 @@ def main():
     with open(path, "w", encoding="utf-8", newline="") as handle:
         handle.write(LINE)
     os.chmod(path, 0o644)
+    with open(path, "rb") as handle:
+        written = handle.read()
+    if written != LINE.encode("utf-8"):
+        raise SystemExit("entry.txt does not match LINE after write")
 
 
 if __name__ == "__main__":
